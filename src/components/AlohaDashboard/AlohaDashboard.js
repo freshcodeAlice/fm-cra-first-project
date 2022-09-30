@@ -4,8 +4,7 @@ import Aloha from '../Aloha/Aloha';
 class AlohaDashboard extends React.Component {
     constructor(props) {
        super(props);
-       this.state = {
-           usersArray: [{
+       const userArray =  [{
                firstName: 'Tony',
                 lastName: 'Stark',
                 }, {
@@ -14,20 +13,26 @@ class AlohaDashboard extends React.Component {
                 }, {
                 firstName: 'Thor',
                 lastName: 'Odinsson',
-                }, {
+                },
+                {
                 firstName: 'Peter',
                 lastName: 'Parker'
                 }, {
                 firstName: 'Natasha',
                 lastName: 'Romanof'
-                }],
+                }];
+          const users = userArray.map((user, index)=>{user.id = index;
+              return user
+        });
+       this.state = {
+            usersArray: users,
             sortDirection: true,
        }
     }
     
     userToAloha() {
         const {usersArray} = this.state;
-        return usersArray.map((user)=> <Aloha name={user.firstName} lastName={user.lastName}/>);
+        return usersArray.map((user)=> <Aloha key={user.id} name={user.firstName} lastName={user.lastName}/>);
     }
     
     sortUsers() {
