@@ -1,0 +1,22 @@
+.scene-on {
+    width: 300px;
+    height: 300px;
+    border: 2px solid black;
+    background: white;    
+}
+
+
+.scene-off {
+    width: 300px;
+    height: 300px;
+    border: 2px solid white;
+    background: black;
+}
+
+
+.indicator {
+    width: 100px;
+    height: 100px;
+    border: 2px solid red;
+    background-color: white;
+}
