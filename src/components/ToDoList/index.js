@@ -1,4 +1,5 @@
 import React from 'react';
+import ToDoItem from './ToDoItem';
 
 class ToDoList extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class ToDoList extends React.Component {
 
     renderLi() {
         const { list } = this.state;
-        return list.map((obj) => <li key={obj.id}>{obj.text}<button onClick={(event)=>{this.onClick(event)}} data-id={obj.id}>X</button></li>)
+        return list.map((obj) => <ToDoItem key={obj.id} text={obj.text} id={obj.id}/>)
     }
 
     render() {
