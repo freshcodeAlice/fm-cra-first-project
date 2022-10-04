@@ -13,14 +13,15 @@ function компонента для Айтема (лі з текстом + кн
 function ToDoItem(props) {
 
 const clickHandler = () => {
-    // маємо викликати коллбек від батьківського елмента і передати туди id поточного, щоб батьківський коллбек його видалив
+    const {delCallback, id} = props;
+    delCallback(id)
 }
-
+console.log(props);
 
     return (
         <li>
             {props.text}
-            <button onClick={()=>{this.onClick()}}>X</button>
+            <button onClick={()=>{clickHandler()}}>X</button>
         </li>
     )
 }

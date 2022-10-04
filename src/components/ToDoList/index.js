@@ -10,9 +10,9 @@ class ToDoList extends React.Component {
         }
     }
 
-    onClick(event) {
+    onClick(id) {
         const {list} = this.state;
-        const {dataset: {id}} = event.target;
+       
       const filtered = list.filter(elem => elem.id !== Number(id));
       this.setState({
         list: filtered
@@ -21,7 +21,7 @@ class ToDoList extends React.Component {
 
     renderLi() {
         const { list } = this.state;
-        return list.map((obj) => <ToDoItem key={obj.id} text={obj.text} id={obj.id}/>)
+        return list.map((obj) => <ToDoItem key={obj.id} text={obj.text} id={obj.id} delCallback = {(id)=>this.onClick(id)}/>)
     }
 
     render() {
