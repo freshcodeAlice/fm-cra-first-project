@@ -21,8 +21,7 @@ class ToDoList extends React.Component {
     }
 
     select(id) {
-        const { list } = this.state;
-        const newList = [...list]
+        const newList = [...this.state.list];
         newList.forEach((obj) => {
             if (obj.id === id) {
                 obj.isSelected = !obj.isSelected;
@@ -34,9 +33,7 @@ class ToDoList extends React.Component {
     }
 
     headerSelected() {
-        const{list} = this.state;
-        const selectedArray = list.filter((obj)=> obj.isSelected);
-        return selectedArray;
+        return this.state.list.filter((obj)=> obj.isSelected);
     }
 
 

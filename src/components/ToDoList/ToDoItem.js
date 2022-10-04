@@ -13,8 +13,8 @@ const selectHandler = () => {
 }
 
     return (
-        <li onClick={selectHandler} className={props.className}>
-            {props.text}
+        <li className={props.className}>
+            <span onClick={selectHandler}> {props.text}</span>
             <button onClick={()=>{clickHandler()}}>X</button>
         </li>
     )
