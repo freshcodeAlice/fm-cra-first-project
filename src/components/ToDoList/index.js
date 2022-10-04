@@ -1,34 +1,65 @@
 import React from 'react';
 import ToDoItem from './ToDoItem';
+import Header from './Header';
+
 
 class ToDoList extends React.Component {
     constructor(props) {
         super(props);
-        const list = ['go to party', 'meet friends', 'have a walk'].map((text, index) => ({ id: index, text }))
+        const list = ['go to party', 'meet friends', 'have a walk'].map((text, index) => ({ id: index, text, isSelected: false }))
         this.state = {
             list
         }
     }
 
     onClick(id) {
-        const {list} = this.state;
-       
-      const filtered = list.filter(elem => elem.id !== Number(id));
-      this.setState({
-        list: filtered
-      })
+        const { list } = this.state;
+        const filtered = list.filter(elem => elem.id !== Number(id));
+        this.setState({
+            list: filtered
+        })
     }
+
+    select(id) {
+        const { list } = this.state;
+        const newList = [...list]
+        newList.forEach((obj) => {
+            if (obj.id === id) {
+                obj.isSelected = !obj.isSelected;
+            }
+        });
+        this.setState({
+            list: newList
+        })
+    }
+
+    headerSelected() {
+        const{list} = this.state;
+        const selectedArray = list.filter((obj)=> obj.isSelected);
+        return selectedArray;
+    }
+
 
     renderLi() {
         const { list } = this.state;
-        return list.map((obj) => <ToDoItem key={obj.id} text={obj.text} id={obj.id} delCallback = {(id)=>this.onClick(id)}/>)
+        return list.map((obj) => 
+        <ToDoItem 
+        key={obj.id} 
+        text={obj.text} 
+        id={obj.id} 
+        delCallback={(id) => this.onClick(id)} 
+        selectCallback={(id) => this.select(id)} 
+        className={obj.isSelected ? 'hightlight':null}/>)
     }
 
     render() {
         return (
-            <ul>
-                {this.renderLi()}
-            </ul>
+            <React.Fragment>
+                <Header list={this.headerSelected()}/>
+                <ul>
+                    {this.renderLi()}
+                </ul>
+            </React.Fragment>
         )
     }
 }

@@ -1,14 +1,4 @@
-/*
-function компонента для Айтема (лі з текстом + кнопкою)
-За натиснення на кнопку лі зникає з екрану
-
-
-1. Зробити функціональну компоненту
-2. Винести в цю компоненту <li>
-3. Переписати return таким чином, щоби вивести на екран все те, що ми отримуємо через props
-4. Зробити коллбек в батьківського елемента, який має отримати id на вхід та видалити зі стейта елемент з таким id.
-5. В компоненті ToDoItem зробити виклик коллбека і передати йому id (за натиснення на кнопку). 
-*/
+import './style.css';
 
 function ToDoItem(props) {
 
@@ -16,10 +6,14 @@ const clickHandler = () => {
     const {delCallback, id} = props;
     delCallback(id)
 }
-console.log(props);
+
+const selectHandler = () => {
+    const {selectCallback, id} = props;
+    selectCallback(id);
+}
 
     return (
-        <li>
+        <li onClick={selectHandler} className={props.className}>
             {props.text}
             <button onClick={()=>{clickHandler()}}>X</button>
         </li>
@@ -28,11 +22,3 @@ console.log(props);
 
 
 export default ToDoItem;
-
-
-
-
-/* Завдання з *
-Створити нову дочірню до ToDolist компоненту Header
-За натиснення на ToDoItem елемент списку має підсвітитися (тоненький червоний бордер), і в Хедері має з'явитись текст з цього айтема
-*/
