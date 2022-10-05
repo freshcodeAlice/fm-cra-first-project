@@ -20,13 +20,7 @@ class SignInForm extends React.Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-
-        if (!this.state.email.includes('@')) {
-            this.setState({
-                isEmailValid: false
-            })
-        }
-        console.log(this.state);
+        this.props.callback(this.state);
     }
 
     render() {
@@ -48,8 +42,3 @@ class SignInForm extends React.Component {
 export default SignInForm;
 
 
-
-/*
-Написати компоненту з формою, що складається з одного інпута і кнопки відправки. За натиснення поряд з формою виникає прямокутник, який вітає користувача тим ім'ям, яке було введено в інпут
-
-*/
