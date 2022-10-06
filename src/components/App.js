@@ -1,5 +1,5 @@
 
-import HelloParent from "./HelloForm/HelloParent";
+import ModalWindowParent from './ModalWindow/ModalWindowParent'
 
 
 function App() {
@@ -7,9 +7,11 @@ function App() {
 
  
     return (
-       <HelloParent />
+      <ModalWindowParent />
     )
 }
 
 
 export default App;
+
+
