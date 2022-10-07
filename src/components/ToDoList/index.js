@@ -1,6 +1,7 @@
 import React from 'react';
 import ToDoItem from './ToDoItem';
-import ToDoForm from './ToDoForm';
+import ToDoForm from './ToDoForm/ToDoForm';
+import styles from './style.module.css';
 
 
 class ToDoList extends React.Component {
@@ -39,15 +40,14 @@ class ToDoList extends React.Component {
         key={obj.id} 
         text={obj.text} 
         id={obj.id} 
-        delCallback={(id) => this.onClick(id)} 
-        className={obj.isSelected ? 'hightlight':null}/>)
+        delCallback={(id) => this.onClick(id)} />)
     }
 
     render() {
         return (
             <React.Fragment>
                 <ToDoForm sendData={this.formHandler}/>
-                <ul>
+                <ul className={styles.container}>
                     {this.renderLi()}
                 </ul>
             </React.Fragment>

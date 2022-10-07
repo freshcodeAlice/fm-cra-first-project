@@ -1,4 +1,4 @@
-import './style.css';
+
 
 function ToDoItem(props) {
 
@@ -13,7 +13,7 @@ const selectHandler = () => {
 }
 
     return (
-        <li className={props.className}>
+        <li>
             <span onClick={selectHandler}> {props.text}</span>
             <button onClick={()=>{clickHandler()}}>X</button>
         </li>
