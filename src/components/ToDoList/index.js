@@ -1,12 +1,12 @@
 import React from 'react';
 import ToDoItem from './ToDoItem';
-import Header from './Header';
+import ToDoForm from './ToDoForm';
 
 
 class ToDoList extends React.Component {
     constructor(props) {
         super(props);
-        const list = ['go to party', 'meet friends', 'have a walk'].map((text, index) => ({ id: index, text, isSelected: false }))
+        const list = ['go to party', 'meet friends', 'have a walk'].map((text, index) => ({ id: (Math.random()*100), text }))
         this.state = {
             list
         }
@@ -20,20 +20,15 @@ class ToDoList extends React.Component {
         })
     }
 
-    select(id) {
-        const newList = [...this.state.list];
-        newList.forEach((obj) => {
-            if (obj.id === id) {
-                obj.isSelected = !obj.isSelected;
-            }
-        });
+    formHandler = (text) => {
+        const {list} = this.state;
         this.setState({
-            list: newList
+            list: [...list, 
+                {
+                id: Math.random()*100,
+                text 
+            }]
         })
-    }
-
-    headerSelected() {
-        return this.state.list.filter((obj)=> obj.isSelected);
     }
 
 
@@ -45,14 +40,13 @@ class ToDoList extends React.Component {
         text={obj.text} 
         id={obj.id} 
         delCallback={(id) => this.onClick(id)} 
-        selectCallback={(id) => this.select(id)} 
         className={obj.isSelected ? 'hightlight':null}/>)
     }
 
     render() {
         return (
             <React.Fragment>
-                <Header list={this.headerSelected()}/>
+                <ToDoForm sendData={this.formHandler}/>
                 <ul>
                     {this.renderLi()}
                 </ul>
@@ -76,6 +70,9 @@ class ToDoList extends React.Component {
 
 В кожній li зробити кнопку, за натиснення на яку цей елемент списку має зникнути.
 (тобто оновити стейт таким чином, щоб в масиві з рядками або об'єктами не було того, який пов'язаний з кнопко
+
+  <Header list={this.headerSelected()}/>
+
 */
 
 export default ToDoList

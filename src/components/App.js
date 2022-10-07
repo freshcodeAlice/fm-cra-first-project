@@ -1,5 +1,4 @@
-
-import ModalWindowParent from './ModalWindow/ModalWindowParent'
+import ToDoList from './ToDoList';
 
 
 function App() {
@@ -7,7 +6,7 @@ function App() {
 
  
     return (
-      <ModalWindowParent />
+      <ToDoList />
     )
 }
 
