@@ -6,14 +6,24 @@ class ToDoForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            todo: ''
+            todo: '',
+            isInputValid: true
         }
     }
 
    changeHandler = ({target: {value, name}}) => {
+
+    if(value.includes('*')) {
         this.setState({
-            [name]: value
+            isInputValid: false
         })
+    } else {
+        this.setState({
+            [name]: value,
+            isInputValid: true
+        })
+    }
+
    }
 
    submitHandler = (event) => {
@@ -23,14 +33,22 @@ class ToDoForm extends Component {
    
    
     render() {
-        const {todo} = this.state;
+        const {todo, isInputValid} = this.state;
+
+        cx({
+            [styles.input]: true,
+            [styles['invalid-input']]: !isInputValid
+        })
+        // const clasName = styles['input'] + ' ' + (isInputValid ? '' : styles['invalid-input']);
         return (
             <form onSubmit={this.submitHandler} className={styles.container}>
                 <input 
                 type='text' 
                 value={todo} 
                 name="todo" 
-                onChange={this.changeHandler}/>
+                onChange={this.changeHandler}
+                className={clasName}
+                />
                 <button type="submit" className={styles.btn}>Submit</button>
             </form>
         );
@@ -39,3 +57,27 @@ class ToDoForm extends Component {
 
 export default ToDoForm;
 
+
+
+
+function cx (objectClassNames) {
+   return Object.entries(objectClassNames)
+   .filter(([className, condition])=>condition)
+   .map(([className, condition]) => className)
+   .join(' ');
+} 
+//'className1 className2'
+
+
+/*
+
+objectClassNames = {
+    className1: true,
+    className2: true,
+    className4: false
+}
+
+// [[className1, true], [className2, true], [className4, false]] -> 
+[[className1, true], [className2, true]] -> [className1, className2] -> 'className1 className2'
+
+*/

@@ -11,3 +11,13 @@
     background-color: rgb(168, 168, 168);
     margin-left: 15px;
 }
+
+.input {
+    height: 2em;
+    background-color: cadetblue;
+}
+
+.invalid-input {
+    border: 2px solid red;
+    background-color: yellow;
+} 
