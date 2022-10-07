@@ -1,0 +1,82 @@
+$main-color: blue;
+$padding-size: 20px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+%flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+    
+    &:hover {
+        background-color: blue;
+    }
+}
+
+@mixin flex($fd, $jc, $ai) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+.form {
+    @include flex(column, center, stretch)
+}
+
+.button {
+    @include flex(row, flex-start, center)
+}
+
+
+.container {
+    @extend %flex-column;
+    color: $main-color;
+    display: flex;
+    font: {
+        size: 16px;
+        weight: 200;
+        family: Arial;
+        style: italic;
+    };
+    margin: $padding-size*3;
+    background: {
+        image: url();
+        color: black;
+        position: center;
+        attachment: fixed;
+    };
+    
+    img {
+    width: 200px;
+    height: 300px;
+    }
+    
+    > h2 {
+    color: green;
+    }
+    
+    &:hover {
+    background-color: blue;
+    }
+    
+    @media screen and (max-width: $xl) {
+        & {
+            color: grey;
+            h2 {
+                color: violet;
+            }
+        }
+    }
+
+}
+
+
+
+.wrapper {
+    @extend %flex-column;
+}
