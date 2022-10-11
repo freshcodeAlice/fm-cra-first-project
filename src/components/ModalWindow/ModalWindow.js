@@ -2,6 +2,7 @@ import React from "react";
 import imgsrc from './2804530.jpg';
 import 'animate.css';
 import './style.css';
+import PropTypes from 'prop-types';
 
 
 class ModalWindow extends React.Component {
@@ -56,6 +57,16 @@ class ModalWindow extends React.Component {
 
         )
     }
+}
+
+ModalWindow.defaultProps = {
+    sendData: () => {}
+}
+
+
+ModalWindow.propTypes = {
+    sendData: PropTypes.func,
+    close: PropTypes.func.isRequired
 }
 
 
