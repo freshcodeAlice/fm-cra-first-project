@@ -28,15 +28,16 @@ class UserList extends React.Component {
             [name]: value
         });
 
-        this.filterHandler();
+        this.filterHandler(value);
     }
 
-    filterHandler = () => {
-        const {users, filterValue} = this.state;
+    filterHandler = (value) => {
+        const {users} = this.state;
         const filteredUsers = users.filter((user) => 
-                            user.name.first
-                            .toLowerCase()
-                            .includes(filterValue));
+             `${user.name.first} ${user.name.last}`
+             .toLowerCase()
+             .includes(value));
+                            
         this.setState({
             filteredUsers
         })
