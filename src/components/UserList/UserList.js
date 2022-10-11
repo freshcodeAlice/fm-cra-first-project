@@ -45,7 +45,9 @@ class UserList extends React.Component {
 
     renderUsers = () => {
         const {filteredUsers} = this.state;
-        return filteredUsers.map((user)=> <UserCard user={user} key={user.email}/>)
+        return filteredUsers
+        .sort((a,b)=> b.name.first > a.name.first ? -1 : 1)
+        .map((user)=> <UserCard user={user} key={user.email}/>)
     }
 
 
