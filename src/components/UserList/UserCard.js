@@ -7,7 +7,7 @@ class UserCard extends React.Component {
 
     
     render() {
-    const {user: {name: {first: firstName, last: lastName}, email, picture: {medium: imgSrc}}} = this.props;
+    const {user: {name: {first: firstName, last: lastName}, email, picture: {large: imgSrc}}} = this.props;
     return (
         <div className="card-wrapper">
             <img src={imgSrc} className="user-img"/>
@@ -27,7 +27,7 @@ UserCard.defaultProps = {
         },
         email: 'mail@mail',
         picture: {
-            medium: ''
+            large: ''
         }
     }
 }
@@ -41,7 +41,7 @@ UserCard.propTypes = {
         }),
         email: PropTypes.string,
         picture: PropTypes.shape({
-            medium: PropTypes.string
+            large: PropTypes.string
         })
       })
 }

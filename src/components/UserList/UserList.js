@@ -7,7 +7,9 @@ class UserList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            users: [],
+            filteredUsers: [],
+            filterValue: ''
         }
     }
 
@@ -15,22 +17,43 @@ class UserList extends React.Component {
         getUser().then(data => {
             const {results} = data;
             this.setState({
-                users: results
+                users: results,
+                filteredUsers: results
             })
         });
     }
 
+    changeSubmit = ({target: {value, name}}) => {
+        this.setState({
+            [name]: value
+        });
+
+        this.filterHandler();
+    }
+
+    filterHandler = () => {
+        const {users, filterValue} = this.state;
+        const filteredUsers = users.filter((user) => 
+                            user.name.first
+                            .toLowerCase()
+                            .includes(filterValue));
+        this.setState({
+            filteredUsers
+        })
+    }
+
     renderUsers = () => {
-        const {users} = this.state;
-        return users.map((user)=> <UserCard user={user} key={user.email}/>)
+        const {filteredUsers} = this.state;
+        return filteredUsers.map((user)=> <UserCard user={user} key={user.email}/>)
     }
 
 
     render() { 
-        const {users} = this.state;
+        const {users, filterValue} = this.state;
             return (
             <>
             <h1>Hello</h1>
+            <input type="text" name="filterValue" value={filterValue} onChange={this.changeSubmit}/>
             <section className="card-container"> {users.length ? this.renderUsers() : null} </section>
             </>
         )
@@ -38,3 +61,13 @@ class UserList extends React.Component {
 }
 
 export default UserList;
+
+
+
+/*
+Реалізувати введення та обробку інпута.
+На основі введених даних фільтрувати всіх користувачів, залишивши тільки тих, в імені яких є вказані літери
+
+
+
+*/

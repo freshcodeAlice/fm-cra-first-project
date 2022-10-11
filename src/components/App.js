@@ -1,11 +1,10 @@
-//import ToDoList from './ToDoList';
-import UserCard from './UserList/UserCard';
+import UserList from './UserList/UserList';
 
 
 function App() {
  
     return (
-     <UserCard/>
+     <UserList />
     )
 }
 
