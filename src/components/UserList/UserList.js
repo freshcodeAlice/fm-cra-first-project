@@ -1,7 +1,8 @@
 import React from "react";
 import {getUser} from '../../api';
 import UserCard from "./UserCard";
-import './style.css'
+import './style.css';
+import LoaderSpinner from "../LoaderSpinner";
 
 class UserList extends React.Component {
     constructor(props) {
@@ -9,7 +10,9 @@ class UserList extends React.Component {
         this.state = {
             users: [],
             filteredUsers: [],
-            filterValue: ''
+            filterValue: '',
+            isLoading: true,
+            isError: null
         }
     }
 
@@ -20,7 +23,17 @@ class UserList extends React.Component {
                 users: results,
                 filteredUsers: results
             })
-        });
+        })
+        .catch((error)=>{
+            this.setState({
+                isError: error
+            })
+        })
+        .finally(()=>{
+            this.setState({
+                isLoading: false
+            })
+        })
     }
 
     changeSubmit = ({target: {value, name}}) => {
@@ -52,11 +65,13 @@ class UserList extends React.Component {
 
 
     render() { 
-        const {users, filterValue} = this.state;
+        const {users, filterValue, isLoading, isError} = this.state;
             return (
             <>
             <h1>Hello</h1>
             <input type="text" name="filterValue" value={filterValue} onChange={this.changeSubmit}/>
+            {isLoading && <LoaderSpinner />}
+            {isError && <div>{isError.message}</div>}
             <section className="card-container"> {users.length ? this.renderUsers() : null} </section>
             </>
         )
