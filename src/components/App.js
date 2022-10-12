@@ -1,10 +1,10 @@
-import UserList from './UserList/UserList';
+import UserLoader from './UserList/UserLoader';
 
 
 function App() {
  
     return (
-     <UserList />
+     <UserLoader />
     )
 }
 
