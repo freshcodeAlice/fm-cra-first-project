@@ -1,10 +1,13 @@
-import UserLoader from './UserList/UserLoader';
+
 
 
 function App() {
  
     return (
-     <UserLoader />
+        <>
+        <button onClick={()=>{window.close()}}>Close</button>
+        <button onClick={()=>{window.open('http://localhost:3000/docs/index.html')}}>Open</button>
+        </>
     )
 }
 
