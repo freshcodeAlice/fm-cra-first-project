@@ -5,9 +5,13 @@ const Innerchild = (props) => {
     const {user: {firstName, lastName} = {}} = props;
     return (
        <MyContext.Consumer>
-       {(value)=>{
+       {([user, logOut])=>{
         return (
-            <p>{JSON.stringify(value)}</p>
+            <>
+            <p>{user.firstName}</p>
+            <img src={user.avatar}/>
+            <button onClick={logOut}>Logout</button>
+            </>
         )
        }}
        </MyContext.Consumer>
