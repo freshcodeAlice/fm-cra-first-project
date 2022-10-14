@@ -1,0 +1,37 @@
+[
+    {
+        "brand": "LG",
+        "model": "1",
+        "price": "100$"
+    },
+    {
+        "brand": "Sumsung",
+        "model": "5",
+        "price": "300$"
+    },
+    {
+        "brand": "Xiaomi",
+        "model": "23",
+        "price": "40$"
+    },
+    {
+        "brand": "ChinaBrand",
+        "model": "34",
+        "price": "223$"
+    },
+    {
+        "brand": "SuperBrand",
+        "model": "2",
+        "price": "100$"
+    },
+    {
+        "brand": "LG",
+        "model": "123",
+        "price": "1100$"
+    },
+    {
+        "brand": "Apple",
+        "model": "134",
+        "price": "100$"
+    }
+]
