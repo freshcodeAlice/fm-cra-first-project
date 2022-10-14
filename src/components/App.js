@@ -1,33 +1,29 @@
-import DataProvider from "./DataProvider";
-import PhonesLoader from "./PhonesLoader";
-import TVLoader from "./TVLoader";
+import React from "react";
+import Tree from './Tree';
+import {MyContext} from '../contexts/userContext';
 
 
-function App() {
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: {
+                firstName: 'John',
+                lastName: 'Doe',
+                email: 'johndoe@mail.com',
+                avatar: 'https://www.mtsolar.us/wp-content/uploads/2020/04/avatar-placeholder.png'
+            }
+        }
+    }
  
-    return (
-        <>
-        {/* <PhonesLoader />
-        <TVLoader /> */}
-        <DataProvider loadData={()=>{
-                   return fetch('./phones.json')
-                    .then((response)=>response.json())}}>
-                    {(state)=>{
-                        const {data, isLoading, isError} = state;
-                        return (
-                            <>
-                            {isLoading && <div>Loading...</div>}
-                            {isError && <div>Error happening!</div>}
-                            <ul>
-                                {data.map((data, index)=>
-                                <li key={index}>{data.brand} - {data.model}. Price: {data.price}</li>)}
-                            </ul>
-                            </>
-                        );
-                    }}
-        </DataProvider>
-        </>
-    )
+    render(){
+        console.log(MyContext);
+        return (
+            <MyContext.Provider value={this.state.user}>
+                <Tree/>
+            </MyContext.Provider>
+        )
+    }
 }
 
 
