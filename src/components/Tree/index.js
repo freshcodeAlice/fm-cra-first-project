@@ -3,7 +3,7 @@ import Parent from './Parent';
 import { ThemeContext } from '../../contexts/themeContext';
 import style from './Tree.module.css';
 import cx from 'classnames';
-import { widthTheme } from '../../HOC';
+import { withTheme } from '../../HOC';
 import CONSTANTS from '../../constants';
 const {THEMES} = CONSTANTS;
 
@@ -25,6 +25,6 @@ const Tree = (props) => {
 
 
 
-const TreeWithTheme = widthTheme(Tree);
+const TreeWithTheme = withTheme(Tree);
 
 export default TreeWithTheme;

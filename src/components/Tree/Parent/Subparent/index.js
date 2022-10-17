@@ -3,7 +3,7 @@ import Child from './Child';
 import { ThemeContext } from '../../../../contexts/themeContext';
 import { UserContext } from '../../../../contexts/userContext';
 import CONSTANTS from '../../../../constants';
-import { widthTheme } from '../../../../HOC';
+import { withTheme, withUser } from '../../../../HOC';
 const {THEMES} = CONSTANTS;
 
 const Subparent = (props) => {
@@ -20,18 +20,14 @@ const Subparent = (props) => {
 }
 
 
-const SubparentWithTheme = (props) => {
+/*
+const SubparentWithTheme = withTheme(Subparent);
 
-    return (
-        <UserContext.Consumer>
-        {([user, logOut])=>{
-            const SubparentThemed =  widthTheme(Subparent);
-            return (
-                <SubparentThemed user={user} logOut={logOut}/>
-            )
-        }}
-        </UserContext.Consumer>
-    )
-}
+const SubparentWithThemeWithUser = withUser(SubparentWithTheme);
 
-export default SubparentWithTheme;
+export default SubparentWithThemeWithUser;
+
+*/
+
+
+export default withUser(withTheme(Subparent));
