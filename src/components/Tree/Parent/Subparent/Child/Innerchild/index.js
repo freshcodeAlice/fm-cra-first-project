@@ -1,20 +1,21 @@
 import React from 'react';
-import { MyContext } from '../../../../../../contexts/userContext';
+import { UserContext } from '../../../../../../contexts/userContext';
 
 const Innerchild = (props) => {
     const {user: {firstName, lastName} = {}} = props;
     return (
-       <MyContext.Consumer>
+       <UserContext.Consumer>
        {([user, logOut])=>{
+         console.log('innerchild')
         return (
             <>
             <p>{user.firstName}</p>
-            <img src={user.avatar}/>
+            <img src={user.avatar} style={{width: '80px', height: '80px'}}/>
             <button onClick={logOut}>Logout</button>
             </>
         )
        }}
-       </MyContext.Consumer>
+       </UserContext.Consumer>
     );
 }
 
