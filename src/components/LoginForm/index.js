@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import * as yup from 'yup';
+import { SCHEMA } from '../../schemas';
 
-
-const SCHEMA = yup.object({
-    firstName: yup.string().min(1).max(30),
-    lastName: yup.string().min(1).max(30),
-    email: yup.string().required().email(),
-    pass: yup.string().required().matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/),
-})
 
 const initialState = {
     firstName:'',
