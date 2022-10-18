@@ -9,9 +9,6 @@ const SCHEMA = yup.object({
     pass: yup.string().required().matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/),
 })
 
-
-// SCHEMA.isValidSync(initialState)
-
 const initialState = {
     firstName:'',
     lastName:'',
@@ -24,7 +21,8 @@ class SignUpForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...initialState
+            ...initialState,
+            isError: null
         }
     }
 
@@ -36,12 +34,19 @@ class SignUpForm extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        console.log(this.state)
-        console.log(SCHEMA.isValidSync(this.state));
+
+        try {
+          const result = SCHEMA.validateSync(this.state);
+          console.log(result);
+        } catch(err) {
+            this.setState({
+                isError: err
+            })
+        }
     }
     
     render() {
-        const {firstName, lastName, email,pass} = this.state;
+        const {firstName, lastName, email,pass, isError} = this.state;
         return (
             <form onSubmit={this.submitHandler}>
                 <input 
@@ -75,6 +80,7 @@ class SignUpForm extends Component {
                    
                     />
                     <button>Submit</button>
+                    {isError && <p style={{color: 'red', fontSize: '20px'}}>{isError.message}</p>}
             </form>
         );
     }
