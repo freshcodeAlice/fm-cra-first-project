@@ -14,7 +14,7 @@ const initialState = {
 function SignUpForm (props) {
 
     
-const handleSubmitToFormik = (values,actions) => {
+const handleSubmitToFormik = (values,formikBag) => {
 
 }
 
@@ -44,3 +44,10 @@ const handleSubmitToFormik = (values,actions) => {
     }
 
 export default SignUpForm;
+
+
+
+/*
+Зробити маленьку форму авторизації (email, pass) за допомогою Formik
+
+*/

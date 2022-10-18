@@ -1,6 +1,5 @@
 import React from "react";
-import SignUpForm from "./LoginForm";
-import Tree from './Tree';
+import Counter from './NewCounter/counter';
 
 
 class App extends React.Component {
@@ -16,7 +15,7 @@ class App extends React.Component {
         console.log('App');
         const {user, theme} = this.state;
         return (
-           <SignUpForm />
+          <Counter />
         )
     }
 }
