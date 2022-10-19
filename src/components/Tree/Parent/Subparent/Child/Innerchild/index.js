@@ -3,7 +3,7 @@ import { UserContext } from '../../../../../../contexts/userContext';
 
 
 const Innerchild = (props) => {
-    const userContextValue = useContext(UserContext);
+    const [user, fn] = useContext(UserContext);
 
         return (
             <>
