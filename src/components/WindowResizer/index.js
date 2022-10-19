@@ -1,48 +1,35 @@
+import React, { useState, useEffect } from 'react';
 
-/*
-Написати компоненту WindowResizer
-Яка виводить розмір вьюпорта на поточний момент.
+function WindowResizer (props) {
+    const [sizes, setSizes] = useState({
+        x: 0,
+        y: 0,
+    });
 
-Current viewport width: ....px
-Current vieport height: .....px
-
-*/
-
-import React, { Component } from 'react';
-
-class WindowResizer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            x: 0,
-            y: 0,
-        }
-    }
-    componentDidMount() {
-        window.addEventListener('resize', this.eventHandler);
-    }
+    useEffect(() => {
+        window.addEventListener('resize', eventHandler);
+        return () => {
+            window.removeEventListener('resize', eventHandler)
+        };
+    }, []);
+  
+   
 
     eventHandler = () => {
-            this.setState({
+        setSizes({
                 x: window.innerWidth,
                 y: window.innerHeight
             })
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.eventHandler)
-    }
-    
-    render() {
 
-        const {x, y} = this.state;
+        const {x, y} = sizes;
         return (
             <div>
                <p>Current viewport width: {x}px</p> 
                <p>Current vieport height: {y}px</p> 
             </div>
         );
-    }
 }
 
 export default WindowResizer;
