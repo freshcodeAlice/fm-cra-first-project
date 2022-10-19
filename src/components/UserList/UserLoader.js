@@ -1,76 +1,50 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserList from './UserList';
 import LoaderSpinner from "../LoaderSpinner";
 import {getUser} from '../../api';
 
-class UserLoader extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoading: true,
-            isError: null,
-            page: 1,
-            users: [],
-        }
-    }
-
-
-    componentDidMount() {
-        this.load()
-     }
+function UserLoader(props) {
+    const [users, setUsers] = useState([]);
+    const [page, setPage] = useState(1);
+    const [isError, setError] = useState(null);
+    const [isLoading, setLoading] = useState(true);
  
-     componentDidUpdate(prevProps, prevState) {
-         if(prevState.page !== this.state.page) {
-             this.load(this.state.page)
-         }
-     }
- 
+    useEffect(()=>{
+        load();
+    },[page]); 
 
-    load = (page) => {
+  const load = () => {
         getUser(page).then(data => {
             const {results} = data;
-            this.setState({
-                users: results,
-                filteredUsers: results
-            })
+            setUsers(results);
         })
         .catch((error)=>{
-            this.setState({
-                isError: error
-            })
+           setError(error);
         })
         .finally(()=>{
-            this.setState({
-                isLoading: false
-            })
+            setLoading(false);
         })
     }
 
 
-    prevBtnHandler = () =>{
-        this.setState({
-            page: this.state.page - 1
-        })
+  const prevBtnHandler = () =>{
+      setPage(page > 1 ? page-1 : 1);
     }
 
-    nextBtnHandler = () =>{
-        this.setState({
-            page: this.state.page + 1
-        })
+   const nextBtnHandler = () =>{
+       setPage(page+1)
     }
 
-    render() {
-        const {users, isError, isLoading} = this.state;
+    console.log('render');
         return (
             <>
             {isLoading && <LoaderSpinner />}
             {isError && <div>{isError.message}</div>}
-                <button onClick={this.prevBtnHandler}>Previous page</button>
-                <button onClick={this.nextBtnHandler}>Next page</button>
+                <button onClick={prevBtnHandler}>Previous page</button>
+                <button onClick={nextBtnHandler}>Next page</button>
             {users.length && <UserList users={users}/>}
             </>
         );
-    }
 }
 
 export default UserLoader;
