@@ -1,4 +1,5 @@
 import React from "react";
+import MouseTracker from "./MouseTracker";
 import Counter from './NewCounter/counter';
 
 
@@ -15,7 +16,7 @@ class App extends React.Component {
         console.log('App');
         const {user, theme} = this.state;
         return (
-          <Counter />
+          <MouseTracker />
         )
     }
 }
