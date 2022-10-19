@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 
-class UserCard extends React.Component {
+function UserCard (props) {
 
     
-    render() {
-    const {user: {name: {first: firstName, last: lastName}, email, picture: {large: imgSrc}}} = this.props;
+    const {user: {name: {first: firstName, last: lastName}, email, picture: {large: imgSrc}}} = props;
     return (
         <div className="card-wrapper">
             <img src={imgSrc} className="user-img"/>
@@ -15,8 +14,6 @@ class UserCard extends React.Component {
             <p>{email}</p>
         </div>
     )
-    }
-
 }
 
 UserCard.defaultProps = {
