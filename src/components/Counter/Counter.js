@@ -1,39 +1,32 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import {format, addSeconds} from 'date-fns';
 
-class Counter extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0
+function Counter (props) {
+    const [time, setTime] = useState(new Date(0,0,0,0,0,0,0));
+    const [isRunning, setRunning] = useState(true);
+
+    let id = null;
+
+    useEffect(()=>{
+        if(isRunning) {
+           id = setInterval(()=>{
+            setTime(time => addSeconds(time,1));
+            }, 1000);
         }
-        this.intervarId = null;
+        return ()=>{
+            clearInterval(id);
+        }
+    },[isRunning]);
+
+    const switchRunning = () => {
+        setRunning(!isRunning);
     }
 
-    start = () => {
-        this.intervarId = setInterval(()=> {
-            const {count} = this.state;
-            this.setState({
-                count: count+1
-            })
-        }, 1000);
-        console.log(this.intervarId);
-    }
-
-    componentDidMount() {
-        this.start();
-    }
-
-    componentWillUnmount () {
-        console.log('I will die')
-        clearInterval(this.intervarId);
-    }
-
-    render() {
-        return <>
-        <h1>{this.state.count}</h1>
-        <button>Click</button>
+         return <>
+                <h1>{format(time, 'HH:mm:ss')}</h1>
+                <button onClick={switchRunning}>{isRunning ? 'Stop' : 'Start'}</button>
+                
         </>
-    }
 }
 
 export default Counter
