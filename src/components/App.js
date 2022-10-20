@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import Counter from './Counter/CounterPage';
+import Clicker from './SandboxComponent';
 
 function App (props) {
 
  
         return (
-          <Counter />
+          <Clicker />
         )
 }
 
