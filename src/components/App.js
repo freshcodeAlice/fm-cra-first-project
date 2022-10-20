@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import Clicker from './SandboxComponent';
+import PhonesLoader from "./PhonesLoader";
+
 
 function App (props) {
 
  
         return (
-          <Clicker />
+          <PhonesLoader />
         )
 }
 

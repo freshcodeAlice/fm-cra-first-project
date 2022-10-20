@@ -1,51 +1,19 @@
 import React, { Component } from 'react';
+import {getUser} from '../../api';
 
-class TVLoader extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            tv: [],
-            isLoading: true,
-            isError: null
-        }
-    }
-    componentDidMount() {
-        this.load();
-    }
-    
-    load = () => {
-        fetch('./tv.json')
-        .then((response) => response.json())
-        .then((tv) => {
-            this.setState({
-                tv
-            })
-        })
-        .catch((error) => {
-            this.setState({
-                isError: error
-            })
-        })
-        .finally(()=>{
-            this.setState({
-                isLoading: false
-            })
-        })
-    }
+function UserLoader2 (props) {
 
-
-    render() {
-        const {tv, isLoading, isError} = this.state;
-        return (
-            <>
-            {isLoading && <div>Loading...</div>}
-            {isError && <div>Error happening!</div>}
-            <ol>
-                {tv.map((tel)=> <li>{tel.brand}.{tel.model} --- {tel.price}</li>)}
-            </ol>
-            </>
-        );
-    }
+ const {data, isLoading, error}= useData(getUser);
+     
+     return (
+     <>
+     {isLoading && <div>Loading</div>}
+     {error && <div>{error.message}</div>}
+     <ul>
+     {data && data.map((elem, index) => (<li key={index}>{elem.brand} {elem.model} {elem.price}</li>))}
+      </ul>
+     </>
+     )
 }
 
-export default TVLoader;
+export default UserLoader2;

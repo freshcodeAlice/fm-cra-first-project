@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 /*
 1. Компонента йде за даними
@@ -8,45 +8,24 @@ import React, { Component } from 'react';
 
 */
 
-class DataProvider extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            isLoading: true,
-            isError: null
-        }
-    }
-    
-    componentDidMount(){
-        this.load();
-    }
+export function useData (loadData){
+    const [data, setData] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+ 
+    useEffect(()=>{
+            loadData()
+             .then((data)=> {
+                 setData(data)
+             })
+             .catch((error)=>{
+                 setError(error)
+             })
+             .finally(()=>{
+                 setLoading(false)
+             })
+    },[]);
 
-
-    load = () => {
-        this.props.loadData()
-        .then((data)=> {
-            this.setState({
-                data
-            })
-        })
-        .catch((error)=>{
-            this.setState({
-                isError: error
-            })
-        })
-        .finally(()=>{
-            this.setState({
-                isLoading: false
-            })
-        })
-    }
-
-
-    render() {
-      const layout = this.props.children(this.state);
-      return layout
-    }
+      return {data, isLoading, error}
 }
 
-export default DataProvider;
